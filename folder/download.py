@@ -10,15 +10,15 @@ async def download(url, name, proxy):
 
     try:
         async with aiohttp.ClientSession(headers=headers) as session:
-            async with await session.get(url, proxy=proxy) as response:
-                response = await response.content.read()
+            async with session.get(url, proxy=proxy) as response:
+                response = await response.read()
 
-                async with await aiofiles.open(f'./pic/{name}', 'wb') as file:
+                async with aiofiles.open(f'./pic/{name}', 'wb') as file:
                     await file.write(response)
 
         print(f"{name}下载完成！")
 
         return name
 
-    except:
-        pass
+    except Exception as e:
+        print(e)
