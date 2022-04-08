@@ -36,12 +36,14 @@ def access_pic(password):
                     tasks.append(task)
 
                 loop = asyncio.get_event_loop()
-                results = loop.run_until_complete(asyncio.wait(tasks))
+                result_list = loop.run_until_complete(asyncio.wait(tasks))
 
-                for result in results[0]:
-                    name = result.result()
+                for results in result_list:
+                    for result in results:
+                        name = result.result()
 
-                    if name != None:
-                        db.execute(f"DELETE FROM Picurl WHERE name = '{name}'")
+                        if name != None:
+                            db.execute(
+                                f"DELETE FROM Picurl WHERE name = '{name}'")
 
                 db.commit()
