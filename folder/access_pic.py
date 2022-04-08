@@ -43,7 +43,7 @@ def access_pic(password):
                         name = result.result()
 
                         if name != None:
-                            db.execute(
+                            mycursor.execute(
                                 f"DELETE FROM Picurl WHERE name = '{name}'")
 
                 db.commit()
