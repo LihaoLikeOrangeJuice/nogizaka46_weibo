@@ -16,7 +16,7 @@ async def test_proxy(proxy, timeout):
             async with await session.get("https://weibo.com/login.php",
                                          headers=headers,
                                          proxy=proxy,
-                                         timeout=3) as response:
+                                         timeout=5) as response:
                 status_code = response.status
 
         if status_code == 200:
@@ -35,7 +35,7 @@ def maintain_proxy():
     with redis.Redis(host='localhost', port=6379, db=0) as r:
         while True:
             try:
-                response = requests.get(url, timeout=3)
+                response = requests.get(url, timeout=5)
 
                 get_time = time.time()
 

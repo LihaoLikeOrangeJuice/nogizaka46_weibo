@@ -10,7 +10,7 @@ async def download(url, name, proxy):
 
     try:
         async with aiohttp.ClientSession(headers=headers) as session:
-            async with session.get(url, proxy=proxy, timeout=3) as response:
+            async with session.get(url, proxy=proxy, timeout=5) as response:
                 response = await response.read()
 
                 async with aiofiles.open(f'./pic/{name}', 'wb') as file:
