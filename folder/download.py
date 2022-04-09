@@ -1,5 +1,6 @@
 import aiohttp
 import aiofiles
+from asyncio.exceptions import TimeoutError
 
 
 async def download(url, name, proxy):
@@ -19,6 +20,9 @@ async def download(url, name, proxy):
         print(f"{name}下载完成！")
 
         return name
+
+    except TimeoutError:
+        pass
 
     except Exception as e:
         print(e)

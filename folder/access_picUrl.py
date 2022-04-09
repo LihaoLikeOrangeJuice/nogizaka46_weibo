@@ -4,6 +4,7 @@ import time
 
 import mysql.connector
 import requests
+from requests.exceptions import Timeout
 
 
 def access_cookie():
@@ -65,6 +66,9 @@ def access_picUrl():
                 url = f"https://weibo.com/ajax/profile/getImageWall?uid=6372196907&sinceid={sinceid}"
 
                 time.sleep(random.random() * 2)
+
+            except Timeout:
+                pass
 
             except Exception as e:
                 print(e)

@@ -4,6 +4,7 @@ import time
 import aiohttp
 import redis
 import requests
+from requests.exceptions import Timeout
 
 
 async def test_proxy(proxy, timeout):
@@ -73,6 +74,9 @@ def maintain_proxy():
 
                 if sleep_time > 0:
                     time.sleep(sleep_time)
+
+            except Timeout:
+                pass
 
             except Exception as e:
                 print(e)
