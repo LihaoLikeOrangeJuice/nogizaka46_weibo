@@ -23,13 +23,19 @@ async def test_proxy(proxy, timeout):
         if status_code == 200:
             return proxy, timeout
 
-    except:
-        pass
+    except Exception as e:
+        print(e)
 
 
 def maintain_proxy():
     with open('./proxy.txt', 'r') as file:
         url = file.read()
+
+    with open('./account_number.txt', 'r') as file:
+        account_number = file.read()
+
+    with open('./password.txt', 'r') as file:
+        password = file.read()
 
     index = 0
 
@@ -46,7 +52,7 @@ def maintain_proxy():
                     for item in response.text.split('\n'):
                         item = item.split(',')
 
-                        proxy = 'http://' + item[0]
+                        proxy = f'https://{account_number}:{password}@{item[0]}'
 
                         timeout = item[1].replace("\r", "")
 
