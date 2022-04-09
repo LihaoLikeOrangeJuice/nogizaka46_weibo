@@ -50,7 +50,7 @@ def access_picUrl():
                     pic_url = f"https://wx3.sinaimg.cn/large/{name}"
 
                     mycursor.execute(
-                        f"INSERT Picurl (name, url) VALUES ('{name}', '{pic_url}')"
+                        f"INSERT IGNORE Picurl (name, url) VALUES ('{name}', '{pic_url}')"
                     )
 
                 db.commit()
@@ -68,7 +68,3 @@ def access_picUrl():
 
             except Exception as e:
                 print(e)
-
-                print('运行结束')
-
-                break

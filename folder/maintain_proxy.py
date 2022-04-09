@@ -22,8 +22,8 @@ async def test_proxy(proxy, timeout):
         if status_code == 200:
             return proxy, timeout
 
-    except:
-        pass
+    except Exception as e:
+        print(e)
 
 
 def maintain_proxy():
@@ -34,41 +34,47 @@ def maintain_proxy():
 
     with redis.Redis(host='localhost', port=6379, db=0) as r:
         while True:
-            response = requests.get(url)
+            try:
+                response = requests.get(url)
 
-            get_time = time.time()
+                get_time = time.time()
 
-            tasks = []
+                tasks = []
 
-            if response.status_code == 200:
-                for item in response.text.split('\n'):
-                    item = item.split(',')
+                if response.status_code == 200:
+                    for item in response.text.split('\n'):
+                        item = item.split(',')
 
-                    proxy = 'http://' + item[0]
+                        proxy = 'http://' + item[0]
 
-                    timeout = item[1].replace("\r", "")
+                        timeout = item[1].replace("\r", "")
 
-                    cor = test_proxy(proxy, timeout)
-                    task = asyncio.ensure_future(cor)
-                    tasks.append(task)
+                        cor = test_proxy(proxy, timeout)
+                        task = asyncio.ensure_future(cor)
+                        tasks.append(task)
 
-                loop = asyncio.get_event_loop()
-                result_list = loop.run_until_complete(asyncio.wait(tasks))
+                    loop = asyncio.get_event_loop()
+                    result_list = loop.run_until_complete(asyncio.wait(tasks))
 
-                for results in result_list:
-                    for result in results:
-                        result = result.result()
+                    for results in result_list:
+                        for result in results:
+                            result = result.result()
 
-                        if result != None:
-                            r.setex(name=f"proxy{index}",
-                                    time=int(
-                                        int(result[1]) + get_time -
-                                        time.time() - 1),
-                                    value=result[0])
+                            if result != None:
+                                r.setex(name=f"proxy{index}",
+                                        time=int(
+                                            int(result[1]) + get_time -
+                                            time.time() - 1),
+                                        value=result[0])
 
-                            index += 1
+                                index += 1
 
-            sleep_time = int(10 - time.time() + get_time + 1)
+                sleep_time = int(10 - time.time() + get_time + 1)
 
-            if sleep_time > 0:
-                time.sleep(sleep_time)
+                if sleep_time > 0:
+                    time.sleep(sleep_time)
+
+            except Exception as e:
+                print(e)
+
+                time.sleep(10)
