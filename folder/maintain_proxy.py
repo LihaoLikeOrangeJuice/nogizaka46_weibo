@@ -52,7 +52,7 @@ def maintain_proxy():
                     for item in response.text.split('\n'):
                         item = item.split(',')
 
-                        proxy = f'https://{account_number}:{password}@{item[0]}'
+                        proxy = f'http://{account_number}:{password}@{item[0]}'
 
                         timeout = item[1].replace("\r", "")
 
