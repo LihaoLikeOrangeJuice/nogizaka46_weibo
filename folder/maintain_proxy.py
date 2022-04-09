@@ -1,5 +1,6 @@
 import asyncio
 import time
+from asyncio.exceptions import TimeoutError
 
 import aiohttp
 import redis
@@ -22,6 +23,9 @@ async def test_proxy(proxy, timeout):
 
         if status_code == 200:
             return proxy, timeout
+
+    except TimeoutError as e:
+        pass
 
     except Exception as e:
         print(e)
