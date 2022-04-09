@@ -1,6 +1,7 @@
-import aiohttp
-import aiofiles
 from asyncio.exceptions import TimeoutError
+
+import aiofiles
+import aiohttp
 
 
 async def download(url, name, proxy):
