@@ -8,8 +8,6 @@ from . import download
 
 
 def access_pic(password):
-    time.sleep(60)
-
     with mysql.connector.connect(user="root",
                                  password=password,
                                  host="localhost",
@@ -29,7 +27,15 @@ def access_pic(password):
 
                     name = info[0]
 
-                    proxy = (r.get(r.randomkey())).decode('utf-8')
+                    while True:
+                        key = r.randomkey()
+
+                        if key != None:
+                            proxy = (r.get(key)).decode('utf-8')
+
+                            break
+
+                        time.sleep(10)
 
                     cor = download.download(pic_url, name, proxy)
                     task = asyncio.ensure_future(cor)
