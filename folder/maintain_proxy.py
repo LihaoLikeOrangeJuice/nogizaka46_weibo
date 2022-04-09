@@ -24,7 +24,7 @@ async def test_proxy(proxy, timeout):
         if status_code == 200:
             return proxy, timeout
 
-    except TimeoutError as e:
+    except TimeoutError:
         pass
 
     except Exception as e:
