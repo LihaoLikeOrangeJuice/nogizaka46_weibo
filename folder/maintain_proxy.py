@@ -86,7 +86,7 @@ def maintain_proxy():
                     time.sleep(sleep_time)
 
             except Timeout:
-                pass
+                time.sleep(10)
 
             except Exception as e:
                 print(e)
