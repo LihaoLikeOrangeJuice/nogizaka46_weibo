@@ -43,7 +43,7 @@ def maintain_proxy():
 
     index = 0
 
-    with redis.Redis(host='localhost', port=6379, db=0) as r:
+    with redis.Redis(host='localhost', db=0) as r:
         while True:
             try:
                 response = requests.get(url, timeout=5)

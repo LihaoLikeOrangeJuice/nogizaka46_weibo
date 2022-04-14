@@ -15,7 +15,7 @@ def access_pic(password):
 
         mycursor = db.cursor()
 
-        with redis.Redis(host='localhost', port=6379, db=0) as r:
+        with redis.Redis(host='localhost', db=0) as r:
 
             while True:
                 mycursor.execute(f"SELECT * FROM Picurl LIMIT 5;")
