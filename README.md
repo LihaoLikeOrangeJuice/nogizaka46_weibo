@@ -1,5 +1,12 @@
 # 爬取nogizaka46在微博上的图片
 
+## 安装库
+
+```shell
+conda install redis-py
+conda install mysql-connector-python
+```
+
 ## 简介
 
 一共有15376张图片，所以我用到了MYSQL来存图片的网址
