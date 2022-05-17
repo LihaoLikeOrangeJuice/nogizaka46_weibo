@@ -1,6 +1,6 @@
-# 爬取nogizaka46在微博上的图片
+# 爬取乃木坂46官方微博上的图片
 
-## 安装库
+## 安装依赖
 
 ```shell
 conda install redis-py
