@@ -19,11 +19,11 @@ conda install mysql-connector-python
 
 运行MYSQL和REDIS
 
-在 run.py 同级目录下创建 cookie.txt, proxy.txt, password.txt, account_number.txt文件
+在 nogizaka46_weibo.py 同级目录下创建 cookie.txt, proxy.txt, password.txt, account_number.txt文件
 
 - 在 cookie.txt 中输入 cookie, cookie 为登陆微博后的 XSRF-TOKEN
 - 在 proxy.txt 中输入代理IP的API提取链接
 - 在 password.txt中输入代理的实例ID
 - 在 account_number.txt中输入代理的密码
 
-运行 run.py
+运行 nogizaka46_weibo.py
